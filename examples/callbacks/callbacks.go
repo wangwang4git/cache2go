@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"time"
 
 	"github.com/muesli/cache2go"
@@ -9,6 +11,8 @@ import (
 
 func main() {
 	cache := cache2go.Cache("myCache")
+	l := log.New(os.Stdout, "cache2go: ", log.Ldate|log.Ltime)
+	cache.SetLogger(l)
 
 	// This callback will be triggered every time a new item
 	// gets added to the cache.

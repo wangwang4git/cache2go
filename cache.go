@@ -14,6 +14,7 @@ import (
 
 var (
 	cache = make(map[string]*CacheTable)
+	// 读写锁
 	mutex sync.RWMutex
 )
 

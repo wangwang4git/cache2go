@@ -2,12 +2,17 @@ package main
 
 import (
 	"fmt"
-	"github.com/muesli/cache2go"
+	"log"
+	"os"
 	"strconv"
+
+	"github.com/muesli/cache2go"
 )
 
 func main() {
 	cache := cache2go.Cache("myCache")
+	l := log.New(os.Stdout, "cache2go: ", log.Ldate|log.Ltime)
+	cache.SetLogger(l)
 
 	// The data loader gets called automatically whenever something
 	// tries to retrieve a non-existing key from the cache.

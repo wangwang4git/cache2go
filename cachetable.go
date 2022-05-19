@@ -16,6 +16,7 @@ import (
 
 // CacheTable is a table within the cache
 type CacheTable struct {
+	// Go组合模式：类型嵌入
 	sync.RWMutex
 
 	// The table's name.
@@ -181,10 +182,8 @@ func (table *CacheTable) addInternal(item *CacheItem) {
 	table.Unlock()
 
 	// Trigger callback after adding an item to cache.
-	if addedItem != nil {
-		for _, callback := range addedItem {
-			callback(item)
-		}
+	for _, callback := range addedItem {
+		callback(item)
 	}
 
 	// If we haven't set up any expiration check timer or found a more imminent item.
@@ -219,10 +218,8 @@ func (table *CacheTable) deleteInternal(key interface{}) (*CacheItem, error) {
 	table.Unlock()
 
 	// Trigger callbacks before deleting an item from cache.
-	if aboutToDeleteItem != nil {
-		for _, callback := range aboutToDeleteItem {
-			callback(r)
-		}
+	for _, callback := range aboutToDeleteItem {
+		callback(r)
 	}
 
 	r.RLock()

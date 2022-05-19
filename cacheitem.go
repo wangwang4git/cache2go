@@ -15,6 +15,7 @@ import (
 // CacheItem is an individual cache item
 // Parameter data contains the user-set value in the cache.
 type CacheItem struct {
+	// Go组合模式：类型嵌入
 	sync.RWMutex
 
 	// The item's key.

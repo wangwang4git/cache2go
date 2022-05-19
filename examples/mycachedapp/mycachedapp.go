@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"time"
 
 	"github.com/muesli/cache2go"
@@ -16,6 +18,8 @@ type myStruct struct {
 func main() {
 	// Accessing a new cache table for the first time will create it.
 	cache := cache2go.Cache("myCache")
+	l := log.New(os.Stdout, "cache2go: ", log.Ldate|log.Ltime)
+	cache.SetLogger(l)
 
 	// We will put a new item in the cache. It will expire after
 	// not being accessed via Value(key) for more than 5 seconds.
@@ -32,7 +36,8 @@ func main() {
 
 	// Wait for the item to expire in cache.
 	time.Sleep(6 * time.Second)
-	res, err = cache.Value("someKey")
+	fmt.Println("Sleep 6s...")
+	_, err = cache.Value("someKey")
 	if err != nil {
 		fmt.Println("Item is not cached (anymore).")
 	}
