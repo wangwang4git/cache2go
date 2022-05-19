@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/muesli/cache2go"
+	"github.com/wangwang4git/cache2go"
 )
 
 func main() {
